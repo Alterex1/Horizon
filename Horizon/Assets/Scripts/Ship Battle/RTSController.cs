@@ -12,7 +12,7 @@ public class RTSController : MonoBehaviour
     private InputSystem inputSystem;
 
     public event Action<ShipUnit> OnUnitSelect;
-    public event Action OnUnitDeselect;
+    public event Action<ShipUnit> OnUnitDeselect;
 
     private void Awake()
     {
@@ -49,25 +49,6 @@ public class RTSController : MonoBehaviour
         }
     }
 
-    public void AddSelectedUnit(ShipUnit shipUnit)
-    {
-        if (!selectedShipUnitList.Contains(shipUnit))
-        {
-            selectedShipUnitList.Add(shipUnit);
-            OnUnitSelect?.Invoke(shipUnit);
-        }
-    }
-
-    public void DeselectAll()
-    {
-        foreach (ShipUnit shipUnit in selectedShipUnitList)
-        {
-            OnUnitDeselect?.Invoke();
-        }
-        selectedShipUnitList.Clear();
-
-    }
-
     private List<Vector3> GetPositionListAround(Vector3 startPosition, float distance, int positionCount)
     {
         List<Vector3> positionList = new List<Vector3>();
@@ -88,4 +69,42 @@ public class RTSController : MonoBehaviour
 
         return positionList;
     }
+
+    public bool IsUnitSelected(ShipUnit shipUnit)
+    {
+        return selectedShipUnitList.Contains(shipUnit);
+    }
+
+    public bool TryAddSelectedUnit(ShipUnit shipUnit)
+    {
+        if (!IsUnitSelected(shipUnit))
+        {
+            selectedShipUnitList.Add(shipUnit);
+            OnUnitSelect?.Invoke(shipUnit);
+            return true;
+        }
+        return false;
+    }
+
+    public bool TryRemoveSelectedUnit(ShipUnit shipUnit)
+    {
+        if (IsUnitSelected(shipUnit))
+        {
+            selectedShipUnitList.Remove(shipUnit);
+            OnUnitDeselect?.Invoke(shipUnit);
+            return true;
+        }
+        return false;
+    }
+
+    public void DeselectAll()
+    {
+        foreach (ShipUnit shipUnit in selectedShipUnitList)
+        {
+            OnUnitDeselect?.Invoke(shipUnit);
+        }
+        selectedShipUnitList.Clear();
+
+    }
+
 }

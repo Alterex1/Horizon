@@ -33,7 +33,25 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""id"": ""1b1f2fa5-2ac9-4e1f-8433-46ca0d74eece"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MultiSelect"",
+                    ""type"": ""Button"",
+                    ""id"": ""1b281a93-958a-4830-bf81-52b2c919114b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleSelect"",
+                    ""type"": ""Button"",
+                    ""id"": ""54b81ded-6f4d-41f1-8b0d-58b94c1b7305"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
@@ -49,6 +67,50 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
+                    ""id"": ""1fae9484-cbd0-48fc-bbf7-4b3c64377ce5"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Command"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""3d469f3c-1405-4127-aec5-0008c543daca"",
+                    ""path"": ""OneModifier(overrideModifiersNeedToBePressedFirst=true)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MultiSelect"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""5ae34c47-92f2-4204-b587-5c02932265e0"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MultiSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""26877d9b-2fee-4326-94f1-3a51c5022605"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MultiSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
                     ""id"": ""9ef097e1-7ac4-4584-95b4-69115ccd1639"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -59,15 +121,37 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""1fae9484-cbd0-48fc-bbf7-4b3c64377ce5"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""name"": ""One Modifier"",
+                    ""id"": ""f0731c48-6db5-4168-bbcb-8019b422f8be"",
+                    ""path"": ""OneModifier(overrideModifiersNeedToBePressedFirst=true)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Command"",
-                    ""isComposite"": false,
+                    ""action"": ""ToggleSelect"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""19973be6-ca85-4c99-a1c5-b5e41727e1f7"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""cf918c5d-9d38-4284-9a5c-2222105e9e1a"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -77,6 +161,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         // RTS
         m_RTS = asset.FindActionMap("RTS", throwIfNotFound: true);
         m_RTS_Select = m_RTS.FindAction("Select", throwIfNotFound: true);
+        m_RTS_MultiSelect = m_RTS.FindAction("MultiSelect", throwIfNotFound: true);
+        m_RTS_ToggleSelect = m_RTS.FindAction("ToggleSelect", throwIfNotFound: true);
         m_RTS_Command = m_RTS.FindAction("Command", throwIfNotFound: true);
     }
 
@@ -140,12 +226,16 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_RTS;
     private List<IRTSActions> m_RTSActionsCallbackInterfaces = new List<IRTSActions>();
     private readonly InputAction m_RTS_Select;
+    private readonly InputAction m_RTS_MultiSelect;
+    private readonly InputAction m_RTS_ToggleSelect;
     private readonly InputAction m_RTS_Command;
     public struct RTSActions
     {
         private @InputActions m_Wrapper;
         public RTSActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Select => m_Wrapper.m_RTS_Select;
+        public InputAction @MultiSelect => m_Wrapper.m_RTS_MultiSelect;
+        public InputAction @ToggleSelect => m_Wrapper.m_RTS_ToggleSelect;
         public InputAction @Command => m_Wrapper.m_RTS_Command;
         public InputActionMap Get() { return m_Wrapper.m_RTS; }
         public void Enable() { Get().Enable(); }
@@ -159,6 +249,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Select.started += instance.OnSelect;
             @Select.performed += instance.OnSelect;
             @Select.canceled += instance.OnSelect;
+            @MultiSelect.started += instance.OnMultiSelect;
+            @MultiSelect.performed += instance.OnMultiSelect;
+            @MultiSelect.canceled += instance.OnMultiSelect;
+            @ToggleSelect.started += instance.OnToggleSelect;
+            @ToggleSelect.performed += instance.OnToggleSelect;
+            @ToggleSelect.canceled += instance.OnToggleSelect;
             @Command.started += instance.OnCommand;
             @Command.performed += instance.OnCommand;
             @Command.canceled += instance.OnCommand;
@@ -169,6 +265,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Select.started -= instance.OnSelect;
             @Select.performed -= instance.OnSelect;
             @Select.canceled -= instance.OnSelect;
+            @MultiSelect.started -= instance.OnMultiSelect;
+            @MultiSelect.performed -= instance.OnMultiSelect;
+            @MultiSelect.canceled -= instance.OnMultiSelect;
+            @ToggleSelect.started -= instance.OnToggleSelect;
+            @ToggleSelect.performed -= instance.OnToggleSelect;
+            @ToggleSelect.canceled -= instance.OnToggleSelect;
             @Command.started -= instance.OnCommand;
             @Command.performed -= instance.OnCommand;
             @Command.canceled -= instance.OnCommand;
@@ -192,6 +294,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     public interface IRTSActions
     {
         void OnSelect(InputAction.CallbackContext context);
+        void OnMultiSelect(InputAction.CallbackContext context);
+        void OnToggleSelect(InputAction.CallbackContext context);
         void OnCommand(InputAction.CallbackContext context);
     }
 }

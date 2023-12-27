@@ -20,7 +20,13 @@ public class SelectionBoxVisual : MonoBehaviour
         inputSystem = InputSystem.Instance;
 
         inputSystem.OnSelectStartedAction += SelectionBoxVisual_OnSelectStartedAction;
-        inputSystem.OnSelectReleasedAction += SelectionBoxVisual_OnSelectReleaseAction;
+        inputSystem.OnSelectReleasedAction += SelectionBoxVisual_OnSelectReleasedAction;
+
+        inputSystem.OnMultiSelectStartedAction += SelectionBoxVisual_OnSelectStartedAction;
+        inputSystem.OnMultiSelectReleasedAction += SelectionBoxVisual_OnSelectReleasedAction;
+
+        inputSystem.OnToggleSelectStartedAction += SelectionBoxVisual_OnSelectStartedAction;
+        inputSystem.OnToggleSelectReleasedAction += SelectionBoxVisual_OnSelectReleasedAction;
 
     }
 
@@ -31,7 +37,7 @@ public class SelectionBoxVisual : MonoBehaviour
 
     }
 
-    private void SelectionBoxVisual_OnSelectReleaseAction()
+    private void SelectionBoxVisual_OnSelectReleasedAction()
     {
         Hide();
     }
@@ -43,7 +49,7 @@ public class SelectionBoxVisual : MonoBehaviour
 
     private void UpdateVisual()
     {
-        if (inputSystem.IsSelectPressed())
+        if (inputSystem.IsSelectPressed() || inputSystem.IsMultiSelectPressed() || inputSystem.IsToggleSelectPressed())
         {
             Vector3 currentMousePosition = MouseWorld.GetMouseWorldPosition();
 
