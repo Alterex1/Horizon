@@ -8,6 +8,8 @@ public class RTSController : MonoBehaviour
 {
     public static RTSController Instance { get; private set; }
 
+    [SerializeField] private float worldSize = 100;
+
     public List<ShipUnit> selectedShipUnitList { get; private set; }
     private InputSystem inputSystem;
 
@@ -105,6 +107,11 @@ public class RTSController : MonoBehaviour
         }
         selectedShipUnitList.Clear();
 
+    }
+
+    public float GetWorldSize()
+    {
+        return worldSize;
     }
 
 }

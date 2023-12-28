@@ -17,6 +17,7 @@ public class InputSystem : MonoBehaviour
     public event Action OnToggleSelectStartedAction;
     public event Action OnToggleSelectReleasedAction;
     public event Action OnCommandAction;
+    public event Action OnCameraZoomAction;
 
     private void Awake()
     {
@@ -42,6 +43,8 @@ public class InputSystem : MonoBehaviour
         inputActions.RTS.ToggleSelect.canceled += ToggleSelect_Canceled;
 
         inputActions.RTS.Command.started += Command_Started;
+
+        inputActions.RTS.CameraZoom.performed += CameraZoom_Performed;
     }
 
 
@@ -80,6 +83,11 @@ public class InputSystem : MonoBehaviour
         OnCommandAction?.Invoke();
     }
 
+    private void CameraZoom_Performed(InputAction.CallbackContext context)
+    {
+        OnCameraZoomAction?.Invoke();
+    }
+
     private void OnDestroy()
     {
         inputActions.RTS.Select.started -= Select_Started;
@@ -92,6 +100,8 @@ public class InputSystem : MonoBehaviour
         inputActions.RTS.ToggleSelect.canceled -= ToggleSelect_Canceled;
 
         inputActions.RTS.Command.started -= Command_Started;
+
+        inputActions.RTS.CameraZoom.performed -= CameraZoom_Performed;
 
         inputActions.Dispose();
     }
@@ -110,4 +120,15 @@ public class InputSystem : MonoBehaviour
     {
         return inputActions.RTS.ToggleSelect.IsPressed();
     }
+
+    public Vector2 GetCameraMovementVectorNormalized()
+    {
+        return inputActions.RTS.CameraMovement.ReadValue<Vector2>().normalized;
+    }
+
+    public int GetZoomScrollValue()
+    { // If value is positive then scrolling up, if negative then scrolling down, zero if not scrolling
+        return (int)(inputActions.RTS.CameraZoom.ReadValue<float>() / 120f);
+    }
+
 }
