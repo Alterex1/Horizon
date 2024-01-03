@@ -33,7 +33,25 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""id"": ""1b1f2fa5-2ac9-4e1f-8433-46ca0d74eece"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MultiSelect"",
+                    ""type"": ""Button"",
+                    ""id"": ""1b281a93-958a-4830-bf81-52b2c919114b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleSelect"",
+                    ""type"": ""Button"",
+                    ""id"": ""54b81ded-6f4d-41f1-8b0d-58b94c1b7305"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
@@ -44,9 +62,71 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CameraMovement"",
+                    ""type"": ""Value"",
+                    ""id"": ""8bd64b35-03ab-4aa6-8ecc-ceeceef515be"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""CameraZoom"",
+                    ""type"": ""Value"",
+                    ""id"": ""d3393e25-fa85-43f1-9b28-94d46101acce"",
+                    ""expectedControlType"": ""Delta"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""1fae9484-cbd0-48fc-bbf7-4b3c64377ce5"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Command"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""3d469f3c-1405-4127-aec5-0008c543daca"",
+                    ""path"": ""OneModifier(overrideModifiersNeedToBePressedFirst=true)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MultiSelect"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""5ae34c47-92f2-4204-b587-5c02932265e0"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MultiSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""26877d9b-2fee-4326-94f1-3a51c5022605"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MultiSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
                 {
                     ""name"": """",
                     ""id"": ""9ef097e1-7ac4-4584-95b4-69115ccd1639"",
@@ -59,13 +139,101 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""1fae9484-cbd0-48fc-bbf7-4b3c64377ce5"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""name"": ""One Modifier"",
+                    ""id"": ""f0731c48-6db5-4168-bbcb-8019b422f8be"",
+                    ""path"": ""OneModifier(overrideModifiersNeedToBePressedFirst=true)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Command"",
+                    ""action"": ""ToggleSelect"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""19973be6-ca85-4c99-a1c5-b5e41727e1f7"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""cf918c5d-9d38-4284-9a5c-2222105e9e1a"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""802afb3d-cb36-4095-8205-f5cb65a487e5"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMovement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""4193b43f-10ea-402f-b04e-2c82f35a6230"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""924ec96c-420a-4d5b-b1b6-1e52d65c46e5"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""a3c07304-50af-4426-b0dd-1a8193a9684b"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""b2a945a7-57ed-445f-9d46-9924fd717725"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8f891ace-1f13-434d-8552-5fc7b6ac8a60"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraZoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -77,7 +245,11 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         // RTS
         m_RTS = asset.FindActionMap("RTS", throwIfNotFound: true);
         m_RTS_Select = m_RTS.FindAction("Select", throwIfNotFound: true);
+        m_RTS_MultiSelect = m_RTS.FindAction("MultiSelect", throwIfNotFound: true);
+        m_RTS_ToggleSelect = m_RTS.FindAction("ToggleSelect", throwIfNotFound: true);
         m_RTS_Command = m_RTS.FindAction("Command", throwIfNotFound: true);
+        m_RTS_CameraMovement = m_RTS.FindAction("CameraMovement", throwIfNotFound: true);
+        m_RTS_CameraZoom = m_RTS.FindAction("CameraZoom", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -140,13 +312,21 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_RTS;
     private List<IRTSActions> m_RTSActionsCallbackInterfaces = new List<IRTSActions>();
     private readonly InputAction m_RTS_Select;
+    private readonly InputAction m_RTS_MultiSelect;
+    private readonly InputAction m_RTS_ToggleSelect;
     private readonly InputAction m_RTS_Command;
+    private readonly InputAction m_RTS_CameraMovement;
+    private readonly InputAction m_RTS_CameraZoom;
     public struct RTSActions
     {
         private @InputActions m_Wrapper;
         public RTSActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Select => m_Wrapper.m_RTS_Select;
+        public InputAction @MultiSelect => m_Wrapper.m_RTS_MultiSelect;
+        public InputAction @ToggleSelect => m_Wrapper.m_RTS_ToggleSelect;
         public InputAction @Command => m_Wrapper.m_RTS_Command;
+        public InputAction @CameraMovement => m_Wrapper.m_RTS_CameraMovement;
+        public InputAction @CameraZoom => m_Wrapper.m_RTS_CameraZoom;
         public InputActionMap Get() { return m_Wrapper.m_RTS; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -159,9 +339,21 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Select.started += instance.OnSelect;
             @Select.performed += instance.OnSelect;
             @Select.canceled += instance.OnSelect;
+            @MultiSelect.started += instance.OnMultiSelect;
+            @MultiSelect.performed += instance.OnMultiSelect;
+            @MultiSelect.canceled += instance.OnMultiSelect;
+            @ToggleSelect.started += instance.OnToggleSelect;
+            @ToggleSelect.performed += instance.OnToggleSelect;
+            @ToggleSelect.canceled += instance.OnToggleSelect;
             @Command.started += instance.OnCommand;
             @Command.performed += instance.OnCommand;
             @Command.canceled += instance.OnCommand;
+            @CameraMovement.started += instance.OnCameraMovement;
+            @CameraMovement.performed += instance.OnCameraMovement;
+            @CameraMovement.canceled += instance.OnCameraMovement;
+            @CameraZoom.started += instance.OnCameraZoom;
+            @CameraZoom.performed += instance.OnCameraZoom;
+            @CameraZoom.canceled += instance.OnCameraZoom;
         }
 
         private void UnregisterCallbacks(IRTSActions instance)
@@ -169,9 +361,21 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Select.started -= instance.OnSelect;
             @Select.performed -= instance.OnSelect;
             @Select.canceled -= instance.OnSelect;
+            @MultiSelect.started -= instance.OnMultiSelect;
+            @MultiSelect.performed -= instance.OnMultiSelect;
+            @MultiSelect.canceled -= instance.OnMultiSelect;
+            @ToggleSelect.started -= instance.OnToggleSelect;
+            @ToggleSelect.performed -= instance.OnToggleSelect;
+            @ToggleSelect.canceled -= instance.OnToggleSelect;
             @Command.started -= instance.OnCommand;
             @Command.performed -= instance.OnCommand;
             @Command.canceled -= instance.OnCommand;
+            @CameraMovement.started -= instance.OnCameraMovement;
+            @CameraMovement.performed -= instance.OnCameraMovement;
+            @CameraMovement.canceled -= instance.OnCameraMovement;
+            @CameraZoom.started -= instance.OnCameraZoom;
+            @CameraZoom.performed -= instance.OnCameraZoom;
+            @CameraZoom.canceled -= instance.OnCameraZoom;
         }
 
         public void RemoveCallbacks(IRTSActions instance)
@@ -192,6 +396,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     public interface IRTSActions
     {
         void OnSelect(InputAction.CallbackContext context);
+        void OnMultiSelect(InputAction.CallbackContext context);
+        void OnToggleSelect(InputAction.CallbackContext context);
         void OnCommand(InputAction.CallbackContext context);
+        void OnCameraMovement(InputAction.CallbackContext context);
+        void OnCameraZoom(InputAction.CallbackContext context);
     }
 }

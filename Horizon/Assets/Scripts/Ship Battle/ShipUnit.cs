@@ -7,7 +7,7 @@ public class ShipUnit : MonoBehaviour
     private float stoppingDistance = 0.1f;
 
     private Vector3 targetPosition;
-    private float moveSpeed = 5f;
+    private float moveSpeed = 10f;
 
     private void Awake()
     {

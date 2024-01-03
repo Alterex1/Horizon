@@ -30,9 +30,12 @@ public class ShipUnitSelectedVisual : MonoBehaviour
 
     }
 
-    private void RTSController_OnUnitDeselect()
+    private void RTSController_OnUnitDeselect(ShipUnit shipUnit)
     {
-        Hide();
+        if (shipUnit == this.shipUnit)
+        {
+            Hide();
+        }
     }
 
     private void Show()
